@@ -1,6 +1,3 @@
-"""
-THIS CLASS HANDLES OPERATIONS ON THE NUMERIC CODE WHICH IS THE BASIS FO THE BULLS AND COWS GAME
-"""
 from consts import BULL, COW
 from random import randint
 from CodeMask import CodeMask
@@ -36,12 +33,12 @@ class BullsCode:
     def check(self, compared_code):
         result = []
         location = 0
-        for x in compared_code.get_code():                        # for each character in secret code
-            if self.__char_exists(x):                             #  check if character appears also in our code
-                if self.__is_bull(x, location):                          #    check if this is a bull
-                    result += BULL                                #       if it is a bull handle it
-                elif self.__is_cow(x, compared_code):  #    then check if this should be handled as a cow or skip
-                    result += COW                                 #       if it is a cow handle it
+        for x in compared_code.get_code():
+            if self.__char_exists(x):
+                if self.__is_bull(x, location):
+                    result += BULL
+                elif self.__is_cow(x, compared_code):
+                    result += COW
             location += 1
 
         return sorted(result)
