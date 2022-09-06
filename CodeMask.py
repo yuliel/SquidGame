@@ -21,18 +21,6 @@ class CodeMask:
         except KeyError:
             return False
 
-    def __skip_char(self, key):
-        try:
-            self.__code_mask.get(key).increase_skip_balance()
-        except KeyError:
-            return
-
-    def __deskip_char(self, key):
-        try:
-            self.__code_mask.get(key).decrease_skip_balance()
-        except KeyError:
-            return
-
     def is_bull(self, key, location):
         try:
             return self.__code_mask.get(key).is_char_in_position(location)
@@ -44,10 +32,10 @@ class CodeMask:
         compared_chars_to_handle = compared_code.get_chars_num_to_handle(key)
 
         if self_chars_to_handle < compared_chars_to_handle:
-            self.__deskip_char(key)
+            self.__code_mask.get(key).decrease_skip_balance()
             return False
         elif self_chars_to_handle > compared_chars_to_handle:
-            self.__skip_char(key)
+            self.__code_mask.get(key).increase_skip_balance()
             return True
         else:
             return True
