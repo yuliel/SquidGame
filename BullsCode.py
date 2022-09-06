@@ -26,18 +26,6 @@ class BullsCode:
     def __should_handle_cow(self, key, compared_code):
         return self.__code_mask.should_handle_cow(key, compared_code)
 
-    def __handle_bull(self, key):
-        self.__code_mask.handle_bull(key)
-        return BULL
-
-    def __handle_cow(self, key):
-        self.__code_mask.handle_cow(key)
-        return COW
-
-    def __skip_char(self, key):
-        #self.__code_mask.skip_char(key)
-        return []
-
     def get_code(self):
         return self.__secret_code
 
@@ -51,11 +39,11 @@ class BullsCode:
         for x in compared_code.get_code():                        # for each character in secret code
             if self.__char_exists(x):                             #  check if character appears also in our code
                 if self.__is_bull(x, i):                          #    check if this is a bull
-                    result += self.__handle_bull(x)               #       if it is a bull handle it
+                    result += BULL                                #       if it is a bull handle it
                 elif self.__should_handle_cow(x, compared_code):  #    then check if this should be handled as a cow
-                    result += self.__handle_cow(x)                #       if it is a cow handle it
-                else:                                             #    key exists, not a bull and shouldn't be handled as a cow
-                    result += self.__skip_char(x)                 #       - skip it
+                    result += COW                                 #       if it is a cow handle it
+                                                                  #    key exists, not a bull and shouldn't be handled as a cow
+                                                                  #       - skip it
             i += 1
 
         return sorted(result)

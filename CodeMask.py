@@ -21,12 +21,6 @@ class CodeMask:
         except KeyError:
             return False
 
-    def handle_bull(self, key):
-        return
-
-    def handle_cow(self, key):
-        return
-
     def __skip_char(self, key):
         try:
             self.__code_mask.get(key).increase_skip_balance()
