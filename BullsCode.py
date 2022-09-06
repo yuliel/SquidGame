@@ -107,6 +107,6 @@ if __name__ == "__main__":
 
     code = BullsCode("1550")
     print("secret = ", code)
-    for x in range(15):
+    for x in range(50):
         curr_guess = BullsCode()
         print(f"guess {x} = {curr_guess}. result = {curr_guess.check(code)}.")
