@@ -3,7 +3,7 @@ from CharMask import CharMask
 
 class CodeMask:
 
-    def __init__(self, code=None):
+    def __init__(self, code):
         self.__code_mask = {}
         i = 0
         for x in code:
