@@ -15,7 +15,8 @@ class BullsCode:
         self.__code_mask = CodeMask(self.__secret_code)  # set the mask for optimization in future comparisons
 
     def __str__(self):
-        return f"code: {self.__secret_code}, mask:{str(self.__code_mask)}"
+        #        return f"code: {self.__secret_code}, mask:{str(self.__code_mask)}"
+        return f"code: {self.__secret_code}"
 
     def __char_exists(self, key):
         return self.__code_mask.char_exists(key)
@@ -34,19 +35,33 @@ class BullsCode:
 
     def check(self, compared_code):
         result = []
-        i = 0
+        location = 0
         for x in compared_code.get_code():                        # for each character in secret code
             if self.__char_exists(x):                             #  check if character appears also in our code
-                if self.__is_bull(x, i):                          #    check if this is a bull
+                if self.__is_bull(x, location):                          #    check if this is a bull
                     result += BULL                                #       if it is a bull handle it
                 elif self.__is_cow(x, compared_code):  #    then check if this should be handled as a cow or skip
                     result += COW                                 #       if it is a cow handle it
-            i += 1
+            location += 1
 
         return sorted(result)
 
 
 if __name__ == "__main__":
+
+    assert BullsCode("1234").check(BullsCode("1234")) == ['B', 'B', 'B', 'B']
+
+    assert BullsCode("1254").check(BullsCode("1234")) == ['B', 'B', 'B']
+    assert BullsCode("1234").check(BullsCode("1254")) == ['B', 'B', 'B']
+
+    assert BullsCode("8555").check(BullsCode("1550")) == ['B', 'B']
+    assert BullsCode("1550").check(BullsCode("8555")) == ['B', 'B']
+
+    assert BullsCode("5558").check(BullsCode("1550")) == ['B', 'B']
+    assert BullsCode("1550").check(BullsCode("5558")) == ['B', 'B']
+
+    assert BullsCode("5555").check(BullsCode("1550")) == ['B', 'B']
+    assert BullsCode("1550").check(BullsCode("5555")) == ['B', 'B']
 
     assert BullsCode("1550").check(BullsCode("3852")) == ['B']
     assert BullsCode("3852").check(BullsCode("1550")) == ['B']
@@ -57,27 +72,41 @@ if __name__ == "__main__":
     assert BullsCode("9008").check(BullsCode("1550")) == ['C']
     assert BullsCode("1550").check(BullsCode("9008")) == ['C']
 
+    assert BullsCode("9245").check(BullsCode("1550")) == ['C']
+    assert BullsCode("1550").check(BullsCode("9245")) == ['C']
+
+    assert BullsCode("0089").check(BullsCode("1500")) == ['C', 'C']
+    assert BullsCode("1500").check(BullsCode("0089")) == ['C', 'C']
+
+    assert BullsCode("0849").check(BullsCode("4900")) == ['C', 'C', 'C']
+    assert BullsCode("4900").check(BullsCode("0849")) == ['C', 'C', 'C']
+
+    assert BullsCode("5005").check(BullsCode("1550")) == ['C', 'C', 'C']
+    assert BullsCode("1550").check(BullsCode("5005")) == ['C', 'C', 'C']
+
+    assert BullsCode("5678").check(BullsCode("8765")) == ['C', 'C', 'C', 'C']
+
     assert BullsCode("1550").check(BullsCode("3585")) == ['B', 'C']
     assert BullsCode("3585").check(BullsCode("1550")) == ['B', 'C']
 
     assert BullsCode("5587").check(BullsCode("1550")) == ['B', 'C']
     assert BullsCode("1550").check(BullsCode("5587")) == ['B', 'C']
 
-    assert BullsCode("8555").check(BullsCode("1550")) == ['B', 'B']
-    assert BullsCode("1550").check(BullsCode("8555")) == ['B', 'B']
-
-    print(BullsCode("2777").check(BullsCode("7722")))
     assert BullsCode("2777").check(BullsCode("7722")) == ['B', 'C', 'C']
-
-    print(BullsCode("7722").check(BullsCode("2777")))
     assert BullsCode("7722").check(BullsCode("2777")) == ['B', 'C', 'C']
 
-    assert BullsCode("5005").check(BullsCode("1550")) == ['C', 'C', 'C']
-    print(BullsCode("1550").check(BullsCode("5005")))
-    assert BullsCode("1550").check(BullsCode("5005")) == ['C', 'C', 'C']
+    assert BullsCode("2787").check(BullsCode("7780")) == ['B', 'B', 'C']
+    assert BullsCode("7780").check(BullsCode("2787")) == ['B', 'B', 'C']
 
-    assert BullsCode("9245").check(BullsCode("1550")) == ['C']
-    assert BullsCode("1550").check(BullsCode("9245")) == ['C']
+    assert BullsCode("2787").check(BullsCode("7782")) == ['B', 'B', 'C', 'C']
+    assert BullsCode("7782").check(BullsCode("2787")) == ['B', 'B', 'C', 'C']
+
+    assert BullsCode("7340").check(BullsCode("2777")) == ['C']
+    assert BullsCode("2777").check(BullsCode("7340")) == ['C']
+
+    assert BullsCode("127770").check(BullsCode("773409")) == ['C', 'C', 'C']
+    assert BullsCode("3454323").check(BullsCode("9834570")) == ['B', 'C', 'C']
+
 
     code = BullsCode("1550")
     print("secret = ", code)
