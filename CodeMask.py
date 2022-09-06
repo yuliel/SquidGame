@@ -44,10 +44,13 @@ class CodeMask:
         compared_chars_to_handle = compared_code.get_chars_num_to_handle(key)
 
         if self_chars_to_handle < compared_chars_to_handle:
-            self.__skip_char(key)
-        elif self_chars_to_handle > compared_chars_to_handle:
             self.__deskip_char(key)
-        return self_chars_to_handle == compared_chars_to_handle
+            return False
+        elif self_chars_to_handle > compared_chars_to_handle:
+            self.__skip_char(key)
+            return True
+        else:
+            return True
 
     def get_chars_num_to_handle(self, key):
         try:
