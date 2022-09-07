@@ -29,6 +29,7 @@ class BullsCode:
 
     def get_chars_num_to_handle(self, key):
         return self.__code_mask.get_chars_num_to_handle(key)
+
     def check(self, compared_code):
         result = []
         comp_code = compared_code.get_code()
@@ -40,6 +41,7 @@ class BullsCode:
                     result += COW
 
         return sorted(result)
+
 
 if __name__ == "__main__":
 
