@@ -7,7 +7,7 @@ class BullsCode:
     def __init__(self, secret_code=None, number_of_digits=4):
         if secret_code is None:  # set a random code
             self.__secret_code = list(str(randint(0, pow(10, number_of_digits))).zfill(number_of_digits))
-        else:                    # get a code in constructor
+        else:  # get a code in constructor
             self.__secret_code = list(secret_code)
         self.__code_mask = CodeMask(self.__secret_code)  # set the mask for optimization in future comparisons
 
@@ -29,20 +29,17 @@ class BullsCode:
 
     def get_chars_num_to_handle(self, key):
         return self.__code_mask.get_chars_num_to_handle(key)
-
     def check(self, compared_code):
         result = []
-        location = 0
-        for x in compared_code.get_code():
+        comp_code = compared_code.get_code()
+        for x, location in zip(comp_code, range(len(comp_code))):
             if self.__char_exists(x):
                 if self.__is_bull(x, location):
                     result += BULL
                 elif self.__is_cow(x, compared_code):
                     result += COW
-            location += 1
 
         return sorted(result)
-
 
 if __name__ == "__main__":
 
@@ -104,8 +101,7 @@ if __name__ == "__main__":
     assert BullsCode("127770").check(BullsCode("773409")) == ['C', 'C', 'C']
     assert BullsCode("3454323").check(BullsCode("9834570")) == ['B', 'C', 'C']
 
-
-    code = BullsCode("1550")
+    code = BullsCode("1307")
     print("secret = ", code)
     for x in range(50):
         curr_guess = BullsCode()
