@@ -27,7 +27,7 @@ class CodeMask:
         except KeyError:
             return False
 
-    def should_handle_cow(self, key, compared_code):
+    def is_cow(self, key, compared_code):
         self_chars_to_handle = self.__code_mask.get(key).get_chars_num_to_handle()
         compared_chars_to_handle = compared_code.get_chars_num_to_handle(key)
 

@@ -22,7 +22,7 @@ class BullsCode:
         return self.__code_mask.is_bull(key, location)
 
     def __is_cow(self, key, compared_code):
-        return self.__code_mask.should_handle_cow(key, compared_code)
+        return self.__code_mask.is_cow(key, compared_code)
 
     def get_code(self):
         return self.__secret_code
