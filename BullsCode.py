@@ -1,6 +1,7 @@
 from consts import BULL, COW
 from random import randint
 from CodeMask import CodeMask
+import time
 
 
 class BullsCode:
@@ -105,6 +106,25 @@ if __name__ == "__main__":
 
     code = BullsCode("1307")
     print("secret = ", code)
-    for i in range(50):
+
+    TIMECHECK_COUNTER = 50
+    print("====================================================")
+    before = time.time()
+    for i in range(TIMECHECK_COUNTER):
         curr_guess = BullsCode()
         print(f"guess {i} = {curr_guess}. result = {curr_guess.check(code)}.")
+    print("====================================================")
+    print(f"Time diff  : {(time.time()-before)}")
+
+    print("====================================================")
+    before = time.time()
+    for i in range(TIMECHECK_COUNTER):
+        BullsCode().check(code)
+    print(f"Without printing diff  : {(time.time()-before)}")
+
+    print("====================================================")
+    curr_guess = BullsCode()
+    before = time.time()
+    for i in range(TIMECHECK_COUNTER):
+        curr_guess.check(code)
+    print(f"Checks only diff  : {(time.time()-before)}")
