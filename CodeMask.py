@@ -5,12 +5,10 @@ class CodeMask:
 
     def __init__(self, code):
         self.__code_mask = {}
-        i = 0
-        for x in code:
+        for x, i in zip(code, range(len(code))):
             if x not in self.__code_mask.keys():
                 self.__code_mask[x] = CharMask(len(code))
             self.__code_mask.get(x).add_char(i)
-            i += 1
 
     def __str__(self):
         return f"code mask: {str(self.__code_mask)}"
