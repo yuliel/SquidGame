@@ -102,7 +102,7 @@ if __name__ == "__main__":
     code = BullsCode("1307")
     print("secret = ", code)
 
-    TIMECHECK_COUNTER = 5000
+    TIMECHECK_COUNTER = 50000
     print("====================================================")
     before = time.time()
     for i in range(TIMECHECK_COUNTER):
