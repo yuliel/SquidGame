@@ -16,9 +16,6 @@ class BullsCode:
         #        return f"code: {self.__secret_code}, mask:{str(self.__code_mask)}"
         return f"code: {self.__secret_code}"
 
-    def __char_exists(self, key):
-        return self.__code_mask.char_exists(key)
-
     def __is_bull(self, key, location):
         return self.__code_mask.is_bull(key, location)
 
@@ -35,11 +32,10 @@ class BullsCode:
         result = []
         comp_code = compared_code.get_code()
         for x, location in zip(comp_code, range(len(comp_code))):
-            if self.__char_exists(x):
-                if self.__is_bull(x, location):
-                    result += BULL
-                elif self.__is_cow(x, compared_code):
-                    result += COW
+            if self.__is_bull(x, location):
+                result += BULL
+            elif self.__is_cow(x, compared_code):
+                result += COW
 
         return sorted(result)
 
@@ -107,7 +103,7 @@ if __name__ == "__main__":
     code = BullsCode("1307")
     print("secret = ", code)
 
-    TIMECHECK_COUNTER = 50
+    TIMECHECK_COUNTER = 5000
     print("====================================================")
     before = time.time()
     for i in range(TIMECHECK_COUNTER):
@@ -116,6 +112,7 @@ if __name__ == "__main__":
     print("====================================================")
     print(f"Time diff  : {(time.time()-before)}")
 
+'''
     print("====================================================")
     before = time.time()
     for i in range(TIMECHECK_COUNTER):
@@ -128,3 +125,4 @@ if __name__ == "__main__":
     for i in range(TIMECHECK_COUNTER):
         curr_guess.check(code)
     print(f"Checks only diff  : {(time.time()-before)}")
+'''
