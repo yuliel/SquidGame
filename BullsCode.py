@@ -13,7 +13,6 @@ class BullsCode:
         self.__code_mask = CodeMask(self.__secret_code)  # set the mask for optimization in future comparisons
 
     def __str__(self):
-        #        return f"code: {self.__secret_code}, mask:{str(self.__code_mask)}"
         return f"code: {self.__secret_code}"
 
     def __is_bull(self, key, location):
